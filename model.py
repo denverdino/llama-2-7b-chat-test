@@ -69,8 +69,6 @@ def run(message: str,
         top_k=top_k,
         temperature=temperature,
         num_beams=1,
-        bits=4,
-        groupsize=128,
     )
     t = Thread(target=model.generate, kwargs=generate_kwargs)
     t.start()
