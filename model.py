@@ -16,8 +16,7 @@ device = "cpu"
 
 
 model = AutoModelForCausalLM.from_pretrained(model_id, model_type="llama", lib='avx2', hf=True)
-tokenizer = AutoTokenizer.from_pretrained('Llama-2-7b-chat-hf')
-#tokenizer = AutoTokenizer.from_pretrained('meta-llama/Llama-2-7b-chat-hf')
+tokenizer = AutoTokenizer.from_pretrained('meta-llama/Llama-2-7b-chat-hf')
 
 def get_prompt(message: str, chat_history: list[tuple[str, str]],
                system_prompt: str) -> str:
