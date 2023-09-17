@@ -47,7 +47,7 @@ def generate(
     top_p: float,
     top_k: int,
 ) -> Iterator[list[tuple[str, str]]]:
-    logger.info("message=%s",message)
+    #logger.info("message=%s",message)
     if max_new_tokens > MAX_MAX_NEW_TOKENS:
         raise ValueError
 
@@ -70,14 +70,14 @@ def process_example(message: str) -> tuple[str, list[tuple[str, str]]]:
 
 
 def check_input_token_length(message: str, chat_history: list[tuple[str, str]], system_prompt: str) -> None:
-    logger.info("check_input_token_length=%s",message)
+    #logger.info("check_input_token_length=%s",message)
     input_token_length = get_input_token_length(message, chat_history, system_prompt)
-    logger.info("input_token_length",input_token_length)
-    logger.info("MAX_INPUT_TOKEN_LENGTH",MAX_INPUT_TOKEN_LENGTH)
+    #logger.info("input_token_length",input_token_length)
+    #logger.info("MAX_INPUT_TOKEN_LENGTH",MAX_INPUT_TOKEN_LENGTH)
     if input_token_length > MAX_INPUT_TOKEN_LENGTH:
         logger.info("Inside IF condition")
         raise gr.Error(f'The accumulated input is too long ({input_token_length} > {MAX_INPUT_TOKEN_LENGTH}). Clear your chat history and try again.')
-    logger.info("End of check_input_token_length function")
+    #logger.info("End of check_input_token_length function")
 
 
 with gr.Blocks(css='style.css') as demo:
