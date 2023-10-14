@@ -20,29 +20,28 @@ tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
 
 def get_prompt(message: str, chat_history: list[tuple[str, str]],
                system_prompt: str) -> str:
-    logger.info("get_prompt chat_history=%s",chat_history)
-    logger.info("get_prompt system_prompt=%s",system_prompt)
+    #logger.info("get_prompt chat_history=%s",chat_history)
+    #logger.info("get_prompt system_prompt=%s",system_prompt)
     texts = [f'<s>[INST] <<SYS>>\n{system_prompt}\n<</SYS>>\n\n']
-    logger.info("texts=%s",texts)
-    # The first user input is _not_ stripped
+    #logger.info("texts=%s",texts)
     do_strip = False
     for user_input, response in chat_history:
         user_input = user_input.strip() if do_strip else user_input
         do_strip = True
         texts.append(f'{user_input} [/INST] {response.strip()} </s><s>[INST] ')
     message = message.strip() if do_strip else message
-    logger.info("get_prompt message=%s",message)
+    #logger.info("get_prompt message=%s",message)
     texts.append(f'{message} [/INST]')
-    logger.info("get_prompt final texts=%s",texts)
+    #logger.info("get_prompt final texts=%s",texts)
     return ''.join(texts)
 
 
 def get_input_token_length(message: str, chat_history: list[tuple[str, str]], system_prompt: str) -> int:
-    logger.info("get_input_token_length=%s",message)
+    #logger.info("get_input_token_length=%s",message)
     prompt = get_prompt(message, chat_history, system_prompt)
-    logger.info("prompt=%s",prompt)
+    #logger.info("prompt=%s",prompt)
     input_ids = tokenizer([prompt], return_tensors='np', add_special_tokens=False)['input_ids']
-    logger.info("input_ids=%s",input_ids)
+    #logger.info("input_ids=%s",input_ids)
     return input_ids.shape[-1]
 
 
@@ -75,6 +74,5 @@ def run(message: str,
 
     outputs = []
     for text in streamer:
-        logger.info("outputs", outputs)
         outputs.append(text)
         yield "".join(outputs)
