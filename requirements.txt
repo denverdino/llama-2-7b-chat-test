@@ -3,4 +3,4 @@ protobuf==3.20.3
 scipy==1.11.1
 sentencepiece==0.1.99
 transformers==4.31.0
-ctransformers
+ctransformers==0.2.27
