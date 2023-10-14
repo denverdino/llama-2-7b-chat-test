@@ -57,7 +57,7 @@ def run(message: str,
     inputs = tokenizer([prompt], return_tensors='pt', add_special_tokens=False).to(device)
 
     streamer = TextIteratorStreamer(tokenizer,
-                                    timeout=10.,
+                                    timeout=15.,
                                     skip_prompt=True,
                                     skip_special_tokens=True)
     generate_kwargs = dict(
