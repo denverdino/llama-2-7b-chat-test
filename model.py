@@ -11,11 +11,11 @@ logger = logging.get_logger("transformers")
 
 config = {"max_new_tokens": 256, "repetition_penalty": 1.1, 
           "temperature": 0.1, "stream": True}
-model_id = "TheBloke/Llama-2-7B-Chat-GGML"
+model_id = "TheBloke/Llama-2-7b-Chat-GGUF"
 device = "cpu"
 
 
-model = AutoModelForCausalLM.from_pretrained(model_id, model_type="llama", lib="avx2", hf=True)
+model = AutoModelForCausalLM.from_pretrained(model_id, model_type="llama", model_file="llama-2-7b-chat.Q4_K_M.gguf", hf=True)
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
 
 def get_prompt(message: str, chat_history: list[tuple[str, str]],
